@@ -1,0 +1,92 @@
+﻿
+@{
+    ViewData["Title"] = "Listar";
+
+    if (ViewBag.ContaAtiva.NivelAcesso > 1)
+    {
+        Layout = "~/Views/Shared/_LayoutTecnico.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+    
+
+}
+<main>
+    <div class="page-section">
+        <div class="container">
+            <div class="text-center">
+                <h2 class="title-section mb-3">Listar Tickets</h2>
+                @if (ViewBag.ContaAtiva.NivelAcesso > 1)
+                {
+                    <p>Responda e Ajude os seus companheiros de trabalho</p>
+                }
+                else
+                {
+                    <p>Veja aqui todos os tickets criados e os seus detalhes</p>
+                }
+                
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="row">
+                        <div class="col-12 py-2">
+                            <label for="tipoTicket" class="fg-grey">Filtrar por Tipo</label>
+                            <select class="form-control" id="tipoTicketFiltro">
+                                <option value="Todos" data-url="@Url.Action("Listar", "Ticket", new { tipo = "Todos" })">Todos</option>
+                                <option value="Hardware" data-url="@Url.Action("Listar", "Ticket", new { tipo = "Hardware" })">Hardware</option>
+                                <option value="Software" data-url="@Url.Action("Listar", "Ticket", new { tipo = "Software" })">Software</option>
+                            </select>
+                            <span id="tipoEscolhido" style="display: none;">@ViewBag.TipoEscolhido</span>
+                        </div>
+                        
+
+                        @foreach(var ticket in @Model)
+                        {
+                            <div class="col-md-6 col-lg-4 py-3">
+                                <div class="card-blog">
+                                    <div class="header">
+                                        <div class="avatar">
+                                            <img src="../assets/img/person/person_1.jpg" alt="">
+                                        </div>
+                                        <div class="entry-footer">
+                                            <div class="post-author">@ticket.UserCriador</div>
+                                            <a href="#" class="post-date">@ticket.DataCriacao</a>
+                                        </div>
+                                    </div>
+                                    <div class="body">
+                                        <div class="post-title">@ticket.Tipo</div>
+                                        @if (@ticket.Tipo == "Hardware")
+                                        {
+                                            <div class="post-excerpt">@ticket.Equipamento</div>
+                                        }
+                                        else
+                                        {
+                                            <div class="post-excerpt">@ticket.Software</div>
+                                        }
+
+                                    </div>
+                                    <div class="footer">
+                                        <a href="/Ticket/Detalhes/@ticket.Id">Details<span class="mai-chevron-forward text-sm"></span></a>
+                                        @if (ViewBag.ContaAtiva.NivelAcesso > 1)
+                                        {
+                                            <a href="blog-single.html">Answer <span class="mai-chevron-forward text-sm"></span></a>
+                                        }   
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+                       
+
+                        
+
+                    </div>
+                </div>
+
+            </div>
+        </div> <!-- .container -->
+    </div> <!-- .page-section -->
+</main>
+

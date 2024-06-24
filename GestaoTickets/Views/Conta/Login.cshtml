@@ -1,0 +1,45 @@
+﻿@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+
+<body>
+    <main>
+        <div class="page-section">
+            <div class="container">
+                <div class="text-center">
+                    @if (ViewBag.ErrorMessage != null)
+                    {
+                        <h2 class="title-section mb-3" style="color:red">@ViewBag.ErrorMessage</h2>
+                    }
+                    else
+                    {
+                        <h2 class="title-section mb-3">Login to continue to the website</h2>
+                    }
+                </div>
+                
+                <div class="row justify-content-center mt-5">
+                    <div class="col-lg-8">
+                        <form method="post" action="/Conta/Login" class="form-contact">
+                            <div class="row">
+                                <div class="col-sm-6 py-2">
+                                    <label for="name" class="fg-grey">Username</label>
+                                    <input type="text" class="form-control" name="Username" id="name" placeholder="Enter your username" required data-validation-required-message="Por favor indique o seu Username.">
+                                </div>
+                                <div class="col-sm-6 py-2">
+                                    <label for="email" class="fg-grey">Password</label>
+                                    <input type="password" class="form-control" name="Password" id="email" placeholder="Enter your password" required data-validation-required-message="Por favor indique a sua Password.">
+                                </div>
+                                <div class="col-12 mt-3">
+                                    <button type="submit" class="btn btn-primary px-5">Login</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div> <!-- .container -->
+        </div> <!-- .page-section -->
+       
+        </main>
+</body>
+

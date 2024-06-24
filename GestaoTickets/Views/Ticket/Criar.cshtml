@@ -1,0 +1,59 @@
+﻿
+@{
+    ViewData["Title"] = "Criar";
+    if (ViewBag.ContaAtiva.NivelAcesso > 1)
+    {
+        Layout = "~/Views/Shared/_LayoutTecnico.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+}
+
+
+<main>
+    <div class="page-section">
+        <div class="container">
+            <div class="text-center">
+                <h2 class="title-section mb-3">Criar Novo Ticket</h2>
+                <p>Escolha o tipo de ticket e preencha os campos correspondentes.</p>
+            </div>
+            <div class="row justify-content-center mt-5">
+                <div class="col-lg-8">
+                    <form asp-controller="Ticket" asp-action="Salvar" method="post" class="form-contact">
+                        <div class="row">
+                            <div class="col-12 py-2">
+                                <label for="tipoTicket" class="fg-grey">Tipo de Ticket</label>
+                                <select class="form-control" id="tipoTicket" name="tipoTicket">
+                                    <option disabled selected hidden>Escolha o tipo de ticket...</option>
+                                    <option value="Hardware">Hardware</option>
+                                    <option value="Software">Software</option>
+                                </select>
+                            </div>
+
+                            <div class="col-12 py-2" id="camposHardware" style="display:none">
+                                <label for="equipamento" class="fg-grey">Equipamento</label>
+                                <input type="text" class="form-control" id="equipamento" name="equipamento" placeholder="Qual é o equipamento...">
+                                <label for="equipamento" class="fg-grey">Avaria</label>
+                                <input type="text" class="form-control" id="avaria" name="avaria" placeholder="Qual é o problema...">
+                            </div>
+
+                            <div class="col-12 py-2" id="camposSoftware" style="display:none">
+                                <label for="software" class="fg-grey">Software</label>
+                                <input type="text" class="form-control" id="software" name="software" placeholder="Informe o software...">
+                                <label for="software" class="fg-grey">Necessidade</label>
+                                <input type="text" class="form-control" id="necessidade" name="necessidade" placeholder="Informe o software...">
+                            </div>
+
+                            <div id="botao" class="col-12 mt-3" style="display:none">
+                                <button type="submit" class="btn btn-primary px-5">Criar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div> <!-- .container -->
+    </div> <!-- .page-section -->
+</main>
+

@@ -1,0 +1,72 @@
+﻿
+@{
+    if (ViewBag.ContaAtiva.NivelAcesso > 1)
+    {
+        Layout = "~/Views/Shared/_LayoutTecnico.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+    
+}
+
+<link rel="stylesheet" href="/assets/css/bootstrap.css">
+
+<link rel="stylesheet" href="/assets/css/maicons.css">
+
+<link rel="stylesheet" href="/assets/vendor/animate/animate.css">
+
+<link rel="stylesheet" href="/assets/vendor/owl-carousel/css/owl.carousel.css">
+
+<link rel="stylesheet" href="/assets/vendor/fancybox/css/jquery.fancybox.css">
+
+<link rel="stylesheet" href="/assets/css/theme.css">
+
+<main>
+    <div class="page-section">
+        <div class="container">
+            <div class="text-center">
+                <h2 class="title-section mb-3">Detalhes</h2>
+                <p>Ticket ID - @Model.Id</p>
+            </div>
+            <div class="row justify-content-center mt-5">
+                <div class="col-lg-8">
+                    <form action="/Ticket/Detalhes" method="post" class="form-contact">
+                        <div class="row">
+                            <div class="col-sm-6 py-2">
+                                <label for="name" class="fg-grey">Tipo</label>
+                                <input type="text" class="form-control" id="name" placeholder="@Model.Tipo" disabled>
+                            </div>
+                            <div class="col-sm-6 py-2">
+                                <label for="email" class="fg-grey">Criador</label>
+                                <input type="text" class="form-control" id="email" placeholder="@Model.UserCriador" disabled>
+                            </div>
+                            
+                            <div class="col-sm-6 py-2">
+                                <label for="email" class="fg-grey">Data de Criação</label>
+                                <input type="text" class="form-control" id="email" placeholder="@Model.DataCriacao" disabled>
+                            </div>
+                            
+                            <div class="col-sm-6 py-2">
+                                <label for="email" class="fg-grey">Ultima Alteração</label>
+                                <input type="text" class="form-control" id="email" placeholder="@Model.DataCriacao" disabled>
+                            </div>
+                            <div class="col-12 py-2">
+                                <label for="subject" class="fg-grey">Subject</label>
+                                <input type="text" class="form-control" id="subject" placeholder="Subject..">
+                            </div>
+                            <div class="col-12 py-2">
+                                <label for="message" class="fg-grey">Message</label>
+                                <textarea id="message" rows="8" class="form-control" placeholder="Enter message.."></textarea>
+                            </div>
+                            <div class="col-12 mt-3">
+                                <button type="submit" class="btn btn-primary px-5">Voltar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div> <!-- .container -->
+    </div> <!-- .page-section -->
+
