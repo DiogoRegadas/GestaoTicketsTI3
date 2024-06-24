@@ -45,7 +45,7 @@ namespace GestaoTickets.Controllers
                 ContaHelper ch = new ContaHelper();
                 Conta cOut = ch.authUser(contaLogin.Username, contaLogin.Password);
 
-                if (cOut == null)
+                if (cOut.NivelAcesso == 0)
                 {
                     ViewBag.ErrorMessage = "Username or password is invalid.";
                     HttpContext.Session.SetString(Program.SessionContainerName, ch.serializeConta(cOut));
