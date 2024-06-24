@@ -120,23 +120,7 @@ namespace GestaoTickets.Controllers
             th.Save(ticket);
         }
 
-        /*
-        [HttpGet]
-        public IActionResult Detalhes(string id)
-        {
-            if (_conta.NivelAcesso > 0)
-            {
-                TicketsHelper dh = new TicketsHelper();
-                Ticket? ticket = dh.get(id);
-
-                if (ticket == null) return RedirectToAction("Listar", "Documento");
-                TempData["Ticket"] = ticket;
-                return View();
-
-            }
-            return RedirectToAction("Login", "Conta");
-
-        }*/
+        
 
 
         [HttpGet]
@@ -145,7 +129,7 @@ namespace GestaoTickets.Controllers
             if (_conta.NivelAcesso > 0)
             {
                 TicketsHelper th = new TicketsHelper();
-                Ticket ticket = th.get(id); // Obtém o ticket pelo ID
+                Ticket? ticket = th.get(id); // Obtém o ticket pelo ID
 
                 if (ticket == null)
                 {

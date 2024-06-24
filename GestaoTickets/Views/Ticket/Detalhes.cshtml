@@ -34,32 +34,74 @@
                 <div class="col-lg-8">
                     <form action="/Ticket/Detalhes" method="post" class="form-contact">
                         <div class="row">
-                            <div class="col-sm-6 py-2">
+                            <div class="col-12 py-2">
                                 <label for="name" class="fg-grey">Tipo</label>
                                 <input type="text" class="form-control" id="name" placeholder="@Model.Tipo" disabled>
                             </div>
+
                             <div class="col-sm-6 py-2">
                                 <label for="email" class="fg-grey">Criador</label>
                                 <input type="text" class="form-control" id="email" placeholder="@Model.UserCriador" disabled>
                             </div>
-                            
+
                             <div class="col-sm-6 py-2">
-                                <label for="email" class="fg-grey">Data de Criação</label>
+                                <label for="email" class="fg-grey">Data da criação</label>
                                 <input type="text" class="form-control" id="email" placeholder="@Model.DataCriacao" disabled>
                             </div>
-                            
+
                             <div class="col-sm-6 py-2">
-                                <label for="email" class="fg-grey">Ultima Alteração</label>
-                                <input type="text" class="form-control" id="email" placeholder="@Model.DataCriacao" disabled>
+                                <label for="email" class="fg-grey">Alteração feita por</label>
+                                <input type="text" class="form-control" id="email" placeholder="@Model.UserAlteracao" disabled>
                             </div>
-                            <div class="col-12 py-2">
-                                <label for="subject" class="fg-grey">Subject</label>
-                                <input type="text" class="form-control" id="subject" placeholder="Subject..">
+
+   
+                            <div class="col-sm-6 py-2">
+                                <label for="email" class="fg-grey">Data da ultima alteração</label>
+                                <input type="text" class="form-control" id="email" placeholder="@Model.DataAlteracao" disabled>
                             </div>
-                            <div class="col-12 py-2">
-                                <label for="message" class="fg-grey">Message</label>
-                                <textarea id="message" rows="8" class="form-control" placeholder="Enter message.."></textarea>
+                             <div class="col-sm-6 py-2">
+                                <label for="email" class="fg-grey">Status</label>
+                                <input type="text" class="form-control" id="email" placeholder="@Model.Status" disabled>
                             </div>
+                            <div class="col-sm-6 py-2">
+                                <label for="email" class="fg-grey">Status de atendimento</label>
+                                <input type="text" class="form-control" id="email" placeholder="@Model.StatusAtendimento" disabled>
+                            </div>
+                            
+                            @if(Model.Tipo == "Hardware")
+                            {
+                                <div class="col-12 py-2">
+                                    <label for="subject" class="fg-grey">Equipamento</label>
+                                    <input type="text" class="form-control" id="subject" placeholder="@Model.Equipamento" disabled>
+                                </div>
+                                <div class="col-12 py-2">
+                                    <label for="subject" class="fg-grey">Avaria</label>
+                                    <input type="text" class="form-control" id="subject" placeholder="@Model.Avaria" disabled>
+                                </div>
+                                <div class="col-12 py-2">
+                                    <label for="subject" class="fg-grey">Descrição da reparação</label>
+                                    <input type="text" class="form-control" id="subject" placeholder="@Model.DescReparacao" disabled>
+                                    <div class="col-12 py-2">
+                                        <label for="subject" class="fg-grey">Peças Novas</label>
+                                        <input type="text" class="form-control" id="subject" placeholder="@Model.Pecas" disabled>
+                                    </div>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="col-12 py-2">
+                                    <label for="subject" class="fg-grey">Software</label>
+                                    <input type="text" class="form-control" id="subject" placeholder="@Model.Software" disabled>
+                                </div>
+                                <div class="col-12 py-2">
+                                    <label for="subject" class="fg-grey">Necessidade</label>
+                                    <input type="text" class="form-control" id="subject" placeholder="@Model.Necessidade" disabled>
+                                </div>
+                                <div class="col-12 py-2">
+                                    <label for="subject" class="fg-grey">Descriçção da Intervenção</label>
+                                    <input type="text" class="form-control" id="subject" placeholder="@Model.DescIntervencao" disabled>
+                                </div>
+                            }
                             <div class="col-12 mt-3">
                                 <button type="submit" class="btn btn-primary px-5">Voltar</button>
                             </div>

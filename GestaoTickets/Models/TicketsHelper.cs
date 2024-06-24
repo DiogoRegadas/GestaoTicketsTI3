@@ -335,17 +335,19 @@ namespace GestaoTickets.Models
             return ticket;
         }
 
-        public Ticket? get(string uidDoc)
+        public Ticket? get(string id)
         {
             DataTable tickets = new DataTable();
-            Ticket? outDoc = new Ticket();
+            DataRow linha = null;
+            HardwareTicket? ht = new HardwareTicket();
+            SoftwareTicket? st = new SoftwareTicket();
             SqlDataAdapter telefone = new SqlDataAdapter();
             SqlCommand comando = new SqlCommand();
             SqlConnection conexao = new SqlConnection(base.ConnectionDB);
 
             comando.CommandType = CommandType.Text;
-            comando.CommandText = "SELECT * FROM t_Ticket WHERE id=@uid";
-            comando.Parameters.AddWithValue("@uid", uidDoc);
+            comando.CommandText = "SELECT * FROM t_Ticket WHERE id=@id";
+            comando.Parameters.AddWithValue("@id", id);
 
             comando.Connection = conexao;
             telefone.SelectCommand = comando;
@@ -354,43 +356,45 @@ namespace GestaoTickets.Models
             conexao.Close();
             conexao.Dispose();
 
-            if (tickets.Rows.Count == 1)
-            {
-                DataRow linha = tickets.Rows[0];
-                outDoc.Id = Guid.Parse(outDoc.Id.ToString());
-                outDoc.DataCriacao = Convert.ToDateTime(linha["dataCriacao"]);
-                outDoc.DataAlteracao = Convert.ToDateTime(linha["dataAlteracao"]);
-                outDoc.UserCriador = linha["userCriador"].ToString();
-                outDoc.UserAlteracao = linha["userAlteracao"].ToString();
-                outDoc.Status = linha["status"].ToString();
-                outDoc.StatusAtendimento = linha["statusAtendimento"].ToString();
-                outDoc.Tipo = linha["tipo"].ToString();
-                return outDoc;
-            }
-            else
-            {
-                outDoc = null;
-                
-            }
-
-            if (outDoc.Tipo == "Hardware")
+            if (tickets.Rows.Count == 1) linha = tickets.Rows[0];
+            
+ 
+            if (linha["tipo"].ToString() == "Hardware")
             {
                 var hardwareTicket = new HardwareTicket();
-                PreencherHardwareTicket(hardwareTicket, outDoc.Id.ToString());
-                outDoc = hardwareTicket;
+                PreencherHardwareTicket(hardwareTicket, linha["id"].ToString());
+                ht = hardwareTicket;
+                ht.Id = Guid.Parse(id);
+                ht.DataCriacao = Convert.ToDateTime(linha["dataCriacao"]);
+                ht.DataAlteracao = Convert.ToDateTime(linha["dataAlteracao"]);
+                ht.UserCriador = linha["userCriador"].ToString();
+                ht.UserAlteracao = linha["userAlteracao"].ToString();
+                ht.Status = linha["status"].ToString();
+                ht.StatusAtendimento = linha["statusAtendimento"].ToString();
+                ht.Tipo = linha["tipo"].ToString();
+                return ht;
+
+
             }
-            else if (outDoc.Tipo == "Software")
+            else if (linha["tipo"].ToString() == "Software")
             {
                 var softwareTicket = new SoftwareTicket();
-                PreencherSoftwareTicket(softwareTicket, outDoc.Id.ToString());
-                outDoc = softwareTicket;
-            }
-            else
-            {
-                outDoc = null;
-            }
+                PreencherSoftwareTicket(softwareTicket, linha["id"].ToString());
+                st = softwareTicket;
+                st.Id = Guid.Parse(id);
+                st.DataCriacao = Convert.ToDateTime(linha["dataCriacao"]);
+                st.DataAlteracao = Convert.ToDateTime(linha["dataAlteracao"]);
+                st.UserCriador = linha["userCriador"].ToString();
+                st.UserAlteracao = linha["userAlteracao"].ToString();
+                st.Status = linha["status"].ToString();
+                st.StatusAtendimento = linha["statusAtendimento"].ToString();
+                st.Tipo = linha["tipo"].ToString();
+                return st;
 
-            return outDoc;
+            }
+            
+            return null;
+            
         }
 
     }
