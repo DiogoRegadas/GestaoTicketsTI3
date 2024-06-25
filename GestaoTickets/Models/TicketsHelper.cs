@@ -221,7 +221,7 @@ namespace GestaoTickets.Models
                             Transaction = transaction,
                             CommandType = CommandType.Text,
                             CommandText = "UPDATE t_Ticket SET dataAlteracao = @dataAlteracao, userAlteracao = @userAlteracao, " +
-                                          "status = @status, statusAtendimento = @statusAtendimento" +
+                                          "status = @status, statusAtendimento = @statusAtendimento " +
                                           "WHERE id = @id"
                         };
 
@@ -241,13 +241,10 @@ namespace GestaoTickets.Models
                                 Connection = conexao,
                                 Transaction = transaction,
                                 CommandType = CommandType.Text,
-                                CommandText = "UPDATE t_HardwareTicket SET equipamento = @equipamento, avaria = @avaria, " +
-                                              "descReparacao = @descReparacao, pecas = @pecas WHERE id = @id"
+                                CommandText = "UPDATE t_HardwareTicket SET descReparacao = @descReparacao, pecas = @pecas WHERE id = @id"
                             };
 
                             comandoUpdateHardware.Parameters.AddWithValue("@id", hardwareTicket.Id);
-                            comandoUpdateHardware.Parameters.AddWithValue("@equipamento", hardwareTicket.Equipamento);
-                            comandoUpdateHardware.Parameters.AddWithValue("@avaria", hardwareTicket.Avaria);
                             comandoUpdateHardware.Parameters.AddWithValue("@descReparacao", hardwareTicket.DescReparacao);
                             comandoUpdateHardware.Parameters.AddWithValue("@pecas", hardwareTicket.Pecas);
 
@@ -260,13 +257,10 @@ namespace GestaoTickets.Models
                                 Connection = conexao,
                                 Transaction = transaction,
                                 CommandType = CommandType.Text,
-                                CommandText = "UPDATE t_SoftwareTicket SET software = @software, necessidade = @necessidade, " +
-                                              "descIntervencao = @descIntervencao WHERE id = @id"
+                                CommandText = "UPDATE t_SoftwareTicket SET descIntervencao = @descIntervencao WHERE id = @id"
                             };
 
                             comandoUpdateSoftware.Parameters.AddWithValue("@id", softwareTicket.Id);
-                            comandoUpdateSoftware.Parameters.AddWithValue("@software", softwareTicket.Software);
-                            comandoUpdateSoftware.Parameters.AddWithValue("@necessidade", softwareTicket.Necessidade);
                             comandoUpdateSoftware.Parameters.AddWithValue("@descIntervencao", softwareTicket.DescIntervencao);
 
                             comandoUpdateSoftware.ExecuteNonQuery();
@@ -283,7 +277,7 @@ namespace GestaoTickets.Models
             }
         }
 
-
+        //Não esta a ser usado esta funcao (funcao teste)
         public Ticket GetById(string id)
         {
             Ticket ticket = null;

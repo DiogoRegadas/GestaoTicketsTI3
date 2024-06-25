@@ -22,11 +22,21 @@
         <div class="container">
             <div class="text-center">
                 <h2 class="title-section mb-3">Answer Ticket</h2>
-                <p>Ticket ID - @Model.Id</p>
                 <br>
-                <p>Criado por @Model.UserCriador /// @Model.DataCriacao</p>
+                <p>Ticket ID - <b>@Model.Id</b> </p>
                 <br>
-                <p>Ultima vez alterado por @Model.UserCriador /// @Model.DataAlteracao</p>
+                <p>Criado por <b>@Model.UserCriador</b>      Data: <b> @Model.DataCriacao </b></p>
+                <br>
+                @{
+                    string texto = "";
+                    if (Model.UserAlteracao == "") texto = "Não existe ainda nenhum alteração";
+                    else
+                    {
+                        texto = $"Ultima vez alterado por {Model.UserCriador}       Data:  {Model.DataAlteracao}";
+                    }
+                }
+                
+            <p>@texto</p>    
             </div>
             <div class="row justify-content-center mt-5">
                 <div class="col-lg-8">
@@ -48,6 +58,10 @@
                                     <option value="naoResolvido">Não Resolvido</option>
                                 </select>
                             </div>
+                            
+                            <input type="text" class="form-control" id="subject" name="tipoTicket" value="@Model.Tipo" hidden>
+                            <input type="text" class="form-control" id="subject" name="id" value="@Model.Id" hidden>
+                            
                             @if (Model.Tipo == "Hardware")
                             {
                                 <div class="col-12 py-2">

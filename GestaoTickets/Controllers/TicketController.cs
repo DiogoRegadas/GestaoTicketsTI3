@@ -181,5 +181,60 @@ namespace GestaoTickets.Controllers
             return RedirectToAction("Login", "Conta");
         }
 
+        [HttpPost]
+        public IActionResult Editar(Ticket ticket)
+        {
+
+            if (_conta.NivelAcesso > 0)
+            {
+                if (ticket == null) return BadRequest();
+
+                // Identificar o tipo de ticket e criar a instância apropriada
+                if (Request.Form["tipoticket"] == "Hardware")
+                {
+                    HardwareTicket hardwareTicket = new HardwareTicket
+                    {
+                        Id = Guid.Parse(Request.Form["id"]),
+                        DataAlteracao = DateTime.Now,
+                        UserAlteracao = _conta.Nome,
+                        Status = Request.Form["status"],
+                        StatusAtendimento = Request.Form["statusAtendimento"],
+                        Tipo = Request.Form["tipoticket"],
+                        // Campos específicos do HardwareTicket
+                        DescReparacao = Request.Form["descReparacao"],
+                        Pecas = Request.Form["pecas"]
+                    };
+
+                    SaveTicket(hardwareTicket);
+                }
+                else if (Request.Form["tipoticket"] == "Software")
+                {
+                    SoftwareTicket softwareTicket = new SoftwareTicket
+                    {
+                        Id = Guid.Parse(Request.Form["id"]),
+                        DataAlteracao = DateTime.Now,
+                        UserAlteracao = _conta.Nome,
+                        Status = Request.Form["status"],
+                        StatusAtendimento = Request.Form["statusAtendimento"],
+                        Tipo = Request.Form["tipoticket"],
+                        // Campos específicos do SoftwareTicket
+                        DescIntervencao = Request.Form["descIntervencao"],
+                       
+
+                    };
+
+                    SaveTicket(softwareTicket);
+                }
+                else
+                {
+                    return BadRequest("Tipo de ticket inválido.");
+                }
+            }
+
+            return RedirectToAction("Listar", "Ticket", new { tipo = "Todos" });
+
+
+        }
+
     }
 }
