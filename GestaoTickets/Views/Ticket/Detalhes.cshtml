@@ -127,7 +127,7 @@
                             <div class="col-sm-6 py-2">
                                 <a href="@Url.Action("Voltar", "Ticket")" class="btn btn-primary px-5">Back</a>
                             </div>
-                            @if (ViewBag.ContaAtiva.NivelAcesso > 1)
+                            @if (ViewBag.ContaAtiva.NivelAcesso > 1 && Model.StatusAtendimento != "resolvido")
                             {
                                 <div class="col-sm-6 py-2">
                                     <a href="@Url.Action("Editar", "Ticket", new { id = Model.Id })" class="btn btn-primary px-5" style="background-color: green">Answer</a>

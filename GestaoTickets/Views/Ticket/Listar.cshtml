@@ -41,7 +41,6 @@
                             <span id="tipoEscolhido" style="display: none;">@ViewBag.TipoEscolhido</span>
                         </div>
                         
-
                         @foreach(var ticket in @Model)
                         {
                             <div class="col-md-6 col-lg-4 py-3">
@@ -59,19 +58,30 @@
                                         <div class="post-title">@ticket.Tipo</div>
                                         @if (@ticket.Tipo == "Hardware")
                                         {
-                                            <div class="post-excerpt">@ticket.Equipamento</div>
+                                            <div class="post-excerpt"><b>@ticket.Equipamento</b></div>
+                                            <div class="post-excerpt">@ticket.Avaria</div>
                                         }
                                         else
                                         {
-                                            <div class="post-excerpt">@ticket.Software</div>
+                                            <div class="post-excerpt"><b>@ticket.Software</b></div>
+                                            <div class="post-excerpt">@ticket.Necessidade</div>
                                         }
 
                                     </div>
                                     <div class="footer">
-                                        <a href="/Ticket/Detalhes/@ticket.Id">Details<span class="mai-chevron-forward text-sm"></span></a>
-                                        @if (ViewBag.ContaAtiva.NivelAcesso > 1)
+                                        @if (ticket.StatusAtendimento == "resolvido")
                                         {
-                                            <a href="/Ticket/Editar/@ticket.Id">Answer <span class="mai-chevron-forward text-sm"></span></a>
+                                            <div class="post-excerpt" style="color: green;"><b>Status: @ticket.StatusAtendimento</b></div>
+                                        }
+                                        else
+                                        {
+                                            <div class="post-excerpt"><b>Status: @ticket.StatusAtendimento</b></div>
+                                        }
+                                        
+                                        <a href="/Ticket/Detalhes/@ticket.Id">Details<span class="mai-chevron-forward text-sm"></span></a>
+                                        @if (ViewBag.ContaAtiva.NivelAcesso > 1 && ticket.StatusAtendimento != "resolvido")
+                                        {
+                                            <a href="/Ticket/Editar/@ticket.Id" style="color: green;">Answer</a>
                                         }   
                                     </div>
                                 </div>
