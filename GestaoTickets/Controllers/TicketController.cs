@@ -145,7 +145,7 @@ namespace GestaoTickets.Controllers
         }
 
 
-        [HttpPost]
+        [HttpGet]
         public IActionResult Voltar()
         {
             if (_conta.NivelAcesso > 0)
@@ -159,13 +159,21 @@ namespace GestaoTickets.Controllers
             return RedirectToAction("Login", "Conta");
         }
 
-        [HttpPost]
-        public IActionResult Editar()
+        [HttpGet]
+        public IActionResult Editar(string id)
         {
             if (_conta.NivelAcesso > 0)
             {
 
-                return RedirectToAction("Listar", "Ticket", new { tipo = "Todos" });
+                TicketsHelper th = new TicketsHelper();
+                Ticket? ticket = th.get(id); // Obtém o ticket pelo ID
+
+                if (ticket == null)
+                {
+                    return RedirectToAction("Listar", "Ticket", new { tipo = "Todos" });
+                }
+
+                return View(ticket);
 
 
             }

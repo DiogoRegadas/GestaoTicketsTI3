@@ -65,7 +65,7 @@
 
         public Ticket()
         {
-            Id = new Guid();
+            Id = Guid.NewGuid();
             DataCriacao = DateTime.Now;
             DataAlteracao = null;
             UserCriador = "";

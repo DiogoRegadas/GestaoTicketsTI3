@@ -28,7 +28,7 @@
         <div class="container">
             <div class="text-center">
                 <h2 class="title-section mb-3">Detalhes</h2>
-                <p>Ticket ID - @Model.Id</p>
+                <p>Ticket ID - <span class="mai-chevron-forward text-sm">@Model.Id</span></p>
             </div>
             <div class="row justify-content-center mt-5">
                 <div class="col-lg-8">
@@ -123,14 +123,25 @@
                                 </div>
                             }
                             <div class="col-sm-6 py-2">
+                                <a href="@Url.Action("Voltar", "Ticket")" class="btn btn-primary px-5">Back</a>
+                            </div>
+                            @if (ViewBag.ContaAtiva.NivelAcesso > 1)
+                            {
+                                <div class="col-sm-6 py-2">
+                                    <a href="@Url.Action("Editar", "Ticket", new { id = Model.Id })" class="btn btn-primary px-5" style="background-color: green">Answer</a>
+                                </div>
+                            }
+                            <!--
+                                                <div class="col-sm-6 py-2">
                                 <button type="submit" class="btn btn-primary px-5" value="Voltar" asp-action="Voltar">Voltar</button>
                             </div>
-                            @if(ViewBag.ContaAtiva.NivelAcesso > 1)
+                            if(ViewBag.ContaAtiva.NivelAcesso > 1)
                             {
                                 <div class="col-sm-6 py-2">
                                     <button type="submit" class="btn btn-primary px-5" style="background-color: green" value="Editar" asp-action="Editar">Editar</button>
                                 </div>
                             }
+                            -->
                         </div>
                     </form>
                 </div>
