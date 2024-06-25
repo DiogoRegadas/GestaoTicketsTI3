@@ -32,7 +32,7 @@
             </div>
             <div class="row justify-content-center mt-5">
                 <div class="col-lg-8">
-                    <form action="/Ticket/Detalhes" method="post" class="form-contact">
+                    <form asp-controller="Ticket" method="post" class="form-contact">
                         <div class="row">
                             <div class="col-12 py-2">
                                 <label for="name" class="fg-grey">Tipo</label>
@@ -49,16 +49,36 @@
                                 <input type="text" class="form-control" id="email" placeholder="@Model.DataCriacao" disabled>
                             </div>
 
-                            <div class="col-sm-6 py-2">
-                                <label for="email" class="fg-grey">Alteração feita por</label>
-                                <input type="text" class="form-control" id="email" placeholder="@Model.UserAlteracao" disabled>
-                            </div>
+                            
+                            @{
+                                var dataAlt = "";
+                                if (Model.DataAlteracao == Model.DataCriacao)
+                                {
+                                    <div class="col-sm-6 py-2">
+                                        <label for="email" class="fg-grey">Alteração feita por</label>
+                                        <input type="text" class="form-control" id="email" placeholder="Não existe Alterações" disabled>
+                                    </div>
+                                    <div class="col-sm-6 py-2">
+                                        <label for="email" class="fg-grey">Data da ultima alteração</label>
+                                        <input type="text" class="form-control" id="email" placeholder="Não existe Alterações" disabled>
+                                    </div>
+                                    
+                                }
+                                else
+                                {
+                                    <div class="col-sm-6 py-2">
+                                        <label for="email" class="fg-grey">Alteração feita por</label>
+                                        <input type="text" class="form-control" id="email" placeholder="@Model.UserAlteracao" disabled>
+                                    </div>
+                                    <div class="col-sm-6 py-2">
+                                        <label for="email" class="fg-grey">Data da ultima alteração</label>
+                                        <input type="text" class="form-control" id="email" placeholder="@Model.DataAlteracao" disabled>
+                                    </div>
+                                    
+                                }
 
-   
-                            <div class="col-sm-6 py-2">
-                                <label for="email" class="fg-grey">Data da ultima alteração</label>
-                                <input type="text" class="form-control" id="email" placeholder="@Model.DataAlteracao" disabled>
-                            </div>
+                            }
+                            
                              <div class="col-sm-6 py-2">
                                 <label for="email" class="fg-grey">Status</label>
                                 <input type="text" class="form-control" id="email" placeholder="@Model.Status" disabled>
@@ -102,9 +122,15 @@
                                     <input type="text" class="form-control" id="subject" placeholder="@Model.DescIntervencao" disabled>
                                 </div>
                             }
-                            <div class="col-12 mt-3">
-                                <button type="submit" class="btn btn-primary px-5">Voltar</button>
+                            <div class="col-sm-6 py-2">
+                                <button type="submit" class="btn btn-primary px-5" value="Voltar" asp-action="Voltar">Voltar</button>
                             </div>
+                            @if(ViewBag.ContaAtiva.NivelAcesso > 1)
+                            {
+                                <div class="col-sm-6 py-2">
+                                    <button type="submit" class="btn btn-primary px-5" style="background-color: green" value="Editar" asp-action="Editar">Editar</button>
+                                </div>
+                            }
                         </div>
                     </form>
                 </div>

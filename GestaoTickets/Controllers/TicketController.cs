@@ -146,7 +146,21 @@ namespace GestaoTickets.Controllers
 
 
         [HttpPost]
-        public IActionResult Detalhes()
+        public IActionResult Voltar()
+        {
+            if (_conta.NivelAcesso > 0)
+            {
+
+                return RedirectToAction("Listar", "Ticket", new { tipo = "Todos" });
+
+
+            }
+
+            return RedirectToAction("Login", "Conta");
+        }
+
+        [HttpPost]
+        public IActionResult Editar()
         {
             if (_conta.NivelAcesso > 0)
             {
