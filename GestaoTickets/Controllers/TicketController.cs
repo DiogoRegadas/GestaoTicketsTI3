@@ -218,9 +218,8 @@ namespace GestaoTickets.Controllers
                         StatusAtendimento = Request.Form["statusAtendimento"],
                         Tipo = Request.Form["tipoticket"],
                         // Campos específicos do SoftwareTicket
-                        DescIntervencao = Request.Form["descIntervencao"],
-                       
-
+                        DescIntervencao = Request.Form["descIntervencao"]
+                     
                     };
 
                     SaveTicket(softwareTicket);
